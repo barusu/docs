@@ -1,0 +1,70 @@
+.code-wrapper {
+  > div {
+    width: 50%;
+    float: left;
+    height: 100%;
+    padding: 0;
+    &.full {
+      width: 100%;
+    }
+  }
+  .code-control {
+    float: right;
+    font-weight: 900;
+    margin-right: .5em;
+    cursor: pointer;
+    span {
+      font-weight: inherit;
+      opacity: 1;
+    }
+  }
+  .code-control-ck:checked + div {
+    .code-control span {
+      opacity: 0;
+    }
+    // .code-head {
+      // border-bottom: 1px solid #ddd;
+      // border-radius: 2px 2px 0 0;
+    // }
+    pre {
+      height: 0 !important;
+    }
+  }
+  .code-head {
+    position: relative;
+    font-weight: 600;
+    padding: .5em;
+    margin: 0;
+    background: #fafafa;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 1px 0 #ddd;
+    // border-radius: 2px;
+    .xc-svg-icon {
+      vertical-align: top;
+      height: 1.5em;
+    }
+    &.html {
+      color: #e54d14;
+    }
+    &.scss {
+      color: #cf6499;
+    }
+    &.json {
+      color: #fdb555;
+    }
+    &.vue {
+      color: #41b883;
+    }
+  }
+  pre {
+    height: 0em;
+    border-radius: 0 0 2px 2px;
+    overflow: hidden;
+    transition: height 340ms;
+    font-size: 12px;
+    code {
+      height: 100%;
+      overflow: auto;
+    }
+  }
+}
