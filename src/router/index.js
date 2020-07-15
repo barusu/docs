@@ -1,14 +1,18 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+
 import ComponentPage from '@/components/page/component';
-import Component from '@/components/page/index';
-import Transfer from '@/components/page/transfer';
-import Icon from '@/components/page/icon';
-import Button from '@/components/page/button';
-import Mask from '@/components/page/mask';
-import Calendar from '@/components/page/calendar';
-import Message from '@/components/page/message';
-import TimeLine from '@/components/page/timeline';
+import Component from '@/components/page/component/index';
+import Transfer from '@/components/page/component/transfer';
+import Icon from '@/components/page/component/icon';
+import Button from '@/components/page/component/button';
+import Mask from '@/components/page/component/mask';
+import Calendar from '@/components/page/component/calendar';
+import Message from '@/components/page/component/message';
+import TimeLine from '@/components/page/component/timeline';
+
+import PluginPage from '@/components/page/plugin';
+import VueDragResiz from '@/components/page/plugin/vue-drag-resiz';
 
 Vue.use(Router);
 
@@ -26,6 +30,13 @@ export default new Router({
         {path: 'mask', name: 'mask', component: Mask},
         {path: 'message', name: 'message', component: Message},
         {path: 'timeline', name: 'timeline', component: TimeLine}
+      ]
+    }, {
+      path: '/plugin',
+      component: PluginPage,
+      children: [
+        {path: '', name: 'plugin', component: Component},
+        {path: 'vue-drag-resiz', name: 'vue-drag-resiz', component: VueDragResiz}
       ]
     }, {
       path: '*',

@@ -6,6 +6,7 @@
     <span class="title">Document</span>
     <nav>
       <router-link :to="{name: 'components'}">组件</router-link>
+      <router-link :to="{name: 'plugin'}">插件</router-link>
     </nav>
   </header>
 </template>
