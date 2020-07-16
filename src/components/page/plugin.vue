@@ -11,6 +11,7 @@
           </label>
           <ul class="oo-menu-item-list">
             <li class="oo-menu-item"> <router-link :to="{name: 'vue-drag-resiz'}">vue-drag-resize <span></span></router-link> </li>
+            <li class="oo-menu-item"> <router-link :to="{name: 'leader-line'}">leader-line <span></span></router-link> </li>
           </ul>
         </p>
         <!-- <input type="checkbox" id="ck_customized" class="oo-ck">

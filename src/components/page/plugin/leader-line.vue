@@ -1,7 +1,7 @@
 <template>
-  <div class="vue-drag-resize">
+  <div class="leader-line-page">
     <VueDragResize v-for="i in boxs" :key="i.id" :isActive="i.ac" :w="i.w" :h="i.h" :x="i.x" :y="i.y" @activated="set(i)" @deactivated="unset(i)" v-on:resizing="resize" v-on:dragging="resize" :parentLimitation="true" :style="{'background': i.bg}">
-      <div class=""></div>
+      <div :id="'box' + i.id" class=""></div>
     </VueDragResize>
   </div>
 </template>
@@ -20,7 +20,8 @@ export default {
         {id: 2, ac: false, w: 240, h: 100, x: 130, y: 230, bg: '#fdbc40'},
         {id: 3, ac: false, w: 200, h: 300, x: 430, y: 130, bg: '#34c849'},
         {id: 4, ac: false, w: 500, h: 20, x: 230, y: 330, bg: '#d08ce0'}
-      ]
+      ],
+      line: null
     };
   },
   methods: {
@@ -35,14 +36,26 @@ export default {
       console.log(i);
     },
     resize() {
+      this.$nextTick(() => {
+        this.line.position();
+      });
     }
   },
-  computed: {}
+  computed: {},
+  mounted() {
+    this.$nextTick(() => {
+      // eslint-disable-next-line no-undef
+      this.line = new LeaderLine(
+        document.getElementById('box1'),
+        document.getElementById('box2')
+      );
+    });
+  }
 }
 </script>
 
 <style lang="scss">
-.vue-drag-resize {
+.leader-line-page {
   position: relative;
   min-height: 600px;
 }

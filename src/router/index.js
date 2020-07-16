@@ -13,6 +13,7 @@ import TimeLine from '@/components/page/component/timeline';
 
 import PluginPage from '@/components/page/plugin';
 import VueDragResiz from '@/components/page/plugin/vue-drag-resiz';
+import LeaderLine from '@/components/page/plugin/leader-line';
 
 Vue.use(Router);
 
@@ -36,7 +37,8 @@ export default new Router({
       component: PluginPage,
       children: [
         {path: '', name: 'plugin', component: Component},
-        {path: 'vue-drag-resiz', name: 'vue-drag-resiz', component: VueDragResiz}
+        {path: 'vue-drag-resiz', name: 'vue-drag-resiz', component: VueDragResiz},
+        {path: 'leader-line', name: 'leader-line', component: LeaderLine}
       ]
     }, {
       path: '*',
