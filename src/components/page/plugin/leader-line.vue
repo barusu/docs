@@ -8,6 +8,7 @@
 
 <script>
 import VueDragResize from 'vue-drag-resize';
+import Line from './leader-line.js';
 
 export default {
   components: {
