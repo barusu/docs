@@ -46,7 +46,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       // eslint-disable-next-line no-undef
-      this.line = new LeaderLine(
+      this.line = new Line(
         document.getElementById('box1'),
         document.getElementById('box2')
       );

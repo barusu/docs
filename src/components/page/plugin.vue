@@ -3,15 +3,26 @@
     <div class="sidebar">
       <div class="oo-menu">
         <p class="oo-menu-title"> <router-link :to="{name: 'plugin'}">Plugin <span>插件</span></router-link> </p>
+        <input type="checkbox" id="ck_extend" class="oo-ck">
+        <p class="oo-menu-group">
+          <label for="ck_extend" class="oo-menu-group-title">
+            <div>Plugin Extend</div>
+            <span class="oo-arrow"></span>
+          </label>
+          <ul class="oo-menu-item-list">
+            <li class="oo-menu-item"> <router-link :to="{name: 'list-plain-draggable'}">list <span></span></router-link> </li>
+          </ul>
+        </p>
         <input type="checkbox" id="ck_general" class="oo-ck">
-        <p class="oo-menu-vue">
+        <p class="oo-menu-group">
           <label for="ck_general" class="oo-menu-group-title">
             <div>Vue Component</div>
             <span class="oo-arrow"></span>
           </label>
           <ul class="oo-menu-item-list">
-            <li class="oo-menu-item"> <router-link :to="{name: 'vue-drag-resiz'}">vue-drag-resize <span></span></router-link> </li>
+            <li class="oo-menu-item"> <router-link :to="{name: 'vue-drag-resize'}">vue-drag-resize <span></span></router-link> </li>
             <li class="oo-menu-item"> <router-link :to="{name: 'leader-line'}">leader-line <span></span></router-link> </li>
+            <li class="oo-menu-item"> <router-link :to="{name: 'mind-map'}">mind map <span></span></router-link> </li>
           </ul>
         </p>
         <!-- <input type="checkbox" id="ck_customized" class="oo-ck">
