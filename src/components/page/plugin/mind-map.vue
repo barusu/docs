@@ -28,9 +28,9 @@ $c1: #f3f;
   overflow: hidden;
   .mind-content {
     position: absolute;
-    width: 125%;
-    height: 125%;
-    padding: 0 20% 20% 0;
+    width: calc(100% + 50px);
+    height: calc(100% + 50px);
+    padding: 0 50px 50px 0;
     background: #000;
     overflow: scroll;
   }

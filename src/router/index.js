@@ -15,7 +15,8 @@ import PluginPage from '@/components/page/plugin';
 import VueDragResize from '@/components/page/plugin/vue-drag-resize';
 import ListPlainDraggable from '@/components/page/plugin/list-plain-draggable';
 import LeaderLine from '@/components/page/plugin/leader-line';
-import MindMap from '@/components/page/plugin/mind-map';
+// import MindMap from '@/components/page/plugin/mind-map';
+import MindMap from '@/components/page/plugin/mindmap';
 
 Vue.use(Router);
 
