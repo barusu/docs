@@ -23,6 +23,7 @@
             <li class="oo-menu-item"> <router-link :to="{name: 'vue-drag-resize'}">vue-drag-resize <span></span></router-link> </li>
             <li class="oo-menu-item"> <router-link :to="{name: 'leader-line'}">leader-line <span></span></router-link> </li>
             <li class="oo-menu-item"> <router-link :to="{name: 'mind-map'}">mind map <span></span></router-link> </li>
+            <li class="oo-menu-item"> <router-link :to="{name: 'mind-map1'}">mind map1 <span></span></router-link> </li>
           </ul>
         </p>
         <!-- <input type="checkbox" id="ck_customized" class="oo-ck">

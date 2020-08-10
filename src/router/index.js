@@ -15,8 +15,8 @@ import PluginPage from '@/components/page/plugin';
 import VueDragResize from '@/components/page/plugin/vue-drag-resize';
 import ListPlainDraggable from '@/components/page/plugin/list-plain-draggable';
 import LeaderLine from '@/components/page/plugin/leader-line';
-// import MindMap from '@/components/page/plugin/mind-map';
-import MindMap from '@/components/page/plugin/mindmap';
+import MindMap from '@/components/page/plugin/mind-map';
+import MindMap1 from '@/components/page/plugin/mindmap';
 
 Vue.use(Router);
 
@@ -43,6 +43,7 @@ export default new Router({
         {path: 'vue-drag-resize', name: 'vue-drag-resize', component: VueDragResize},
         {path: 'list-plain-draggable', name: 'list-plain-draggable', component: ListPlainDraggable},
         {path: 'mind-map', name: 'mind-map', component: MindMap},
+        {path: 'mind-map1', name: 'mind-map1', component: MindMap1},
         {path: 'leader-line', name: 'leader-line', component: LeaderLine}
       ]
     }, {
