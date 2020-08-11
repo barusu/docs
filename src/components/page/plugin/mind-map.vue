@@ -47,12 +47,12 @@ var mockdata = {
     }
   ]
 };
-function calcWeight(item, y) {
-  item.y = y;
+function calcWeight(item, x) {
+  item.x = x;
   var weight = 0;
   if(item.children) {
     item.children.forEach(i => {
-      weight += calcWeight(i, y + 1);
+      weight += calcWeight(i, x + 1);
     });
   }
   if(weight < 1) {
@@ -64,9 +64,29 @@ function calcWeight(item, y) {
 }
 const bw = 100, bh = 50;
 function calcPostion(item) {
-  // x
+  var spaceTop = 0, spaceBottom = 0, ah = 0;
+  if(item.children) {
+    item.children.forEach(i => {
+      var h = i.weight * 2;
+      if(i.isTerminal) {
+        if(spaceTop >= 2) {
+          spaceTop -= 2;
+          h = 0;
+        }else {
+          h -= spaceTop;
+          spaceTop = 0;
+          spaceBottom += h;
+        }
+      }else {
+        spaceBottom = 0;
+      }
+      ah += h;
+    });
+  }
 }
 calcWeight(mockdata, 1);
+mockdata.y = 0;
+calcPostion(mockdata);
 
 console.log(mockdata);
 function addNode(node, item) {
