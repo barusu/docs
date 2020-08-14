@@ -15,12 +15,19 @@ function Line(el1, el2, opt) {
     else if(!end) end = el2;
   }
 
-  function position() {
-    if(line) line.position();
+  function init() {
+    refreshDom();
+    if(start && end) {
+      line = new LeaderLine(start, end, option);
+    }
   }
 
-  refreshDom();
-  line = new LeaderLine(start, end, option);
+  function position() {
+    if(line) line.position();
+    else init();
+  }
+
+  init();
 
   return {
     position,

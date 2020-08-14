@@ -3,8 +3,8 @@
     <button type="button" @click="reset">reset</button>
     <div class="mind-map" ref="main">
       <div class="mind-content" ref="content" id="mindmap">
-        <div class="top-node node" v-text="main" ref="top"></div>
-        <VueDragResize v-for="i in boxs" :key="i.id" :isActive="i.ac" :w="i.w" :h="i.h" :x="i.x" :y="i.y" @activated="set(i)" @deactivated="unset(i)" v-on:resizing="resize(i)" v-on:dragging="resize(i)" :parentLimitation="false" :isResizable="false">
+        <div class="top-node node" id="node" v-text="main" ref="top"></div>
+        <VueDragResize v-for="i in boxs" :key="i.id" :id="'node' + i.id" :isActive="i.ac" :w="80" :h="30" :x="i.x" :y="i.y" @activated="set(i)" @deactivated="unset(i)" v-on:resizing="resize(i)" v-on:dragging="resize(i)" :parentLimitation="false" :isResizable="false">
           <div :class="i.class" v-text="i.content"></div>
         </VueDragResize>
       </div>
@@ -19,8 +19,9 @@ import Line from './leader-line.js';
 const d3 = window.d3;
 const zoom = d3.zoom();
 
+var nodelist = [], LINES = [];
 var mockdata = {
-  id: '2131',
+  id: '',
   name: 'Main Node',
   children: [
     {
@@ -62,47 +63,45 @@ function calcWeight(item, x) {
   item.weight = weight;
   return weight;
 }
-const bw = 100, bh = 50;
+const bw = 150, bh = 20;
 function calcPostion(item) {
-  var spaceTop = 0, spaceBottom = 0, ah = 0;
+  // var spaceTop = 0, spaceBottom = 0;
+  var ah = item.y + 1;
   if(item.children) {
     item.children.forEach(i => {
-      var h = i.weight * 2;
-      if(i.isTerminal) {
-        if(spaceTop >= 2) {
-          spaceTop -= 2;
-          h = 0;
-        }else {
-          h -= spaceTop;
-          spaceTop = 0;
-          spaceBottom += h;
-        }
-      }else {
-        spaceBottom = 0;
-      }
-      ah += h;
+      var h = i.weight;
+      // if(i.isTerminal) {
+      //   if(spaceTop >= 2) {
+      //     spaceTop -= 2;
+      //     h = 0;
+      //   }else {
+      //     h -= spaceTop;
+      //     spaceTop = 0;
+      //     spaceBottom += h;
+      //   }
+      // }else {
+      //   spaceBottom = 0;
+      // }
+      ah -= h;
+    });
+    item.children.forEach(i => {
+      i.y = ah + i.weight - 1;
+      ah += 2 * i.weight;
+      var line = new Line('node' + item.id, 'node' + i.id);
+      item.lines.push(line);
+      i.lines = [line];
+      LINES.push(line);
+      calcPostion(i);
+      nodelist.push(i);
     });
   }
 }
-calcWeight(mockdata, 1);
+calcWeight(mockdata, 0);
 mockdata.y = 0;
+mockdata.lines = [];
 calcPostion(mockdata);
 
 console.log(mockdata);
-function addNode(node, item) {
-  var x = node.x + 1, y = 0;
-  node.nodes.forEach(i => {
-    y = --i.y + 2;
-  });
-  node.nodes.push({
-    parent: node,
-    x: x,
-    y: y,
-    text: item.name,
-    nodes: [],
-    lines: []
-  });
-}
 
 export default {
   components: {
@@ -113,6 +112,7 @@ export default {
       main: {x: 0, y: 0, text: '', nodes: [], lines: []},
       content: null,
       item: null,
+      list: nodelist,
       boxs: [
         {id: 1, ac: false, w: 100, h: 30, x: 30, y: 30, class: 'node', content: "wwwww"}
       ],
@@ -121,15 +121,25 @@ export default {
   },
   methods: {
     update() {
+      var top = this.$refs.top.offsetTop;
+      var left = this.$refs.top.offsetLeft;
       this.main = this.data.name;
-      this.loop(this.data, this.main, 1);
-    },
-    loop(item, node, level) {
-      if(item.children) {
-        item.children.forEach(i => {
-          addNode(node, i);
+      this.boxs = this.list.map(i => {
+        return {
+          id: i.id,
+          ac: false,
+          x: left + i.x * bw,
+          y: top + i.y * bh,
+          class: 'node',
+          content: i.name,
+          lines: i.lines
+        };
+      });
+      this.$nextTick(() => {
+        this.list.forEach(i => {
+          i.lines.forEach(line => line.position());
         });
-      }
+      });
     },
     reset() {
       this.content.transition().duration(500).call(zoom.transform, d3.zoomIdentity);
@@ -142,20 +152,24 @@ export default {
     },
     unset(i) {
       i.ac = false;
-      console.log(i);
+      // console.log(i);
     },
     resize(i) {
-      console.log(i.id);
+      i.lines.forEach(l => l.position());
+      // console.log(i);
     }
   },
   computed: {},
   mounted() {
-    this.update();
     this.$nextTick(() => {
+      this.update();
       this.content = d3.select(this.$refs.main);
       this.item = d3.select('#mindmap');
       this.content.call(zoom.on('zoom', () => {
         this.item.attr('style', `transform: translate(${d3.event.transform.x}px,${d3.event.transform.y}px) scale(${d3.event.transform.k})`);
+        LINES.forEach(i => {
+          i.position();
+        });
       }))
     });
   }
@@ -185,8 +199,8 @@ $c1: #f3f;
   .top-node {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    left: 30%;
+    // transform: translate(-50%, -50%);
     user-select: none;
   }
   // .item {
