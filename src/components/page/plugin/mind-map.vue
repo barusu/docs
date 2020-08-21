@@ -1,6 +1,8 @@
 <template>
   <div>
-    <button type="button" @click="reset">reset</button>
+    <button type="button" @click="reset">重置</button>
+    <button type="button" @click="reset">添加关系</button>
+    <button type="button" @click="reset">添加节点</button>
     <div class="mind-map" ref="main">
       <div class="mind-content" ref="content" id="mindmap">
         <div class="top-node node" id="node" v-text="main" ref="top"></div>
@@ -63,7 +65,7 @@ function calcWeight(item, x) {
   item.weight = weight;
   return weight;
 }
-const bw = 150, bh = 20;
+const bw = 150, bh = 30;
 function calcPostion(item) {
   // var spaceTop = 0, spaceBottom = 0;
   var ah = item.y + 1;
@@ -87,7 +89,7 @@ function calcPostion(item) {
     item.children.forEach(i => {
       i.y = ah + i.weight - 1;
       ah += 2 * i.weight;
-      var line = new Line('node' + item.id, 'node' + i.id);
+      var line = new Line('node' + item.id, 'node' + i.id, {text: i.x > 1 ? "" : "text test", path: i.x > 1 ? 'grid' : 'fluid'});
       item.lines.push(line);
       i.lines = [line];
       LINES.push(line);
@@ -128,7 +130,7 @@ export default {
         return {
           id: i.id,
           ac: false,
-          x: left + i.x * bw,
+          x: left + i.x * bw + 100,
           y: top + i.y * bh,
           class: 'node',
           content: i.name,
@@ -199,7 +201,7 @@ $c1: #f3f;
   .top-node {
     position: absolute;
     top: 50%;
-    left: 30%;
+    left: 10%;
     // transform: translate(-50%, -50%);
     user-select: none;
   }

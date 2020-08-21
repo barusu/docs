@@ -1,11 +1,15 @@
 const LeaderLine = window.LeaderLine;
 
 function Line(el1, el2, opt) {
-  var start, end, line, option = {};
+  var start, end, line, option = {
+    size: 2,
+    path: 'fluid'
+  };
 
   for(var k in opt) {
     if(option.hasOwnProperty(k)) option[k] = opt[k];
   }
+  if(opt && opt.text) { option.middleLabel = LeaderLine.pathLabel(opt.text); }
 
   function refreshDom() {
     if(typeof el1 === typeof "") start = document.getElementById(el1);
@@ -18,7 +22,7 @@ function Line(el1, el2, opt) {
   function init() {
     refreshDom();
     if(start && end) {
-      line = new LeaderLine(start, end, option);
+      line = new LeaderLine(LeaderLine.pointAnchor(start, {x: '100%', y: '50%'}), LeaderLine.pointAnchor(end, {x: 0, y: '50%'}), option);
     }
   }
 
