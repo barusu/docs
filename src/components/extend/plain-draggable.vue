@@ -1,24 +1,27 @@
 <template>
-  <div ref="el">
-    <slot></slot>
+  <div ref="el" @click="select" class="plain-draggable" :class="{'active': isActive}">
+    <input type="text" v-model="Text">
   </div>
 </template>
 
 <script>
 var PlainDraggable = window.PlainDraggable;
 
+var poi = 1;
+
 export default {
   components: {},
   props: {
-    list: {
-      type: Array,
-      default() {
-        return [];
-      }
+    active: {
+      type: Number
+    },
+    text: {
+      type: String
     }
   },
   data() {
     return {
+      id: ++poi,
       PD: null,
       List: [],
       items: [],
@@ -26,10 +29,11 @@ export default {
       isDrag: false
     };
   },
-  watch: {
-    'list': 'updateList'
-  },
   methods: {
+    select() {
+      console.log('click');
+      this.$emit('select', this.id);
+    },
     init() {
       this.$nextTick(() => {
         this.PD =  new PlainDraggable(this.$refs.el, {
@@ -46,7 +50,19 @@ export default {
       this.PD.remove();
     }
   },
-  computed: {},
+  computed: {
+    isActive() {
+      return this.active == this.id;
+    },
+    Text: {
+      set(v) {
+        this.$emit(v);
+      },
+      get() {
+        return this.text;
+      }
+    }
+  },
   mounted() {
     this.init();
   },
@@ -57,4 +73,9 @@ export default {
 </script>
 
 <style lang="scss">
+.plain-draggable {
+  &.active {
+    border: 1px solid #000;
+  }
+}
 </style>

@@ -1,9 +1,8 @@
 <template>
   <div class="plain-draggable-wrapper" ref="main">
     <div class="content" ref="content">
-      <plain-draggable class="item">
-        spantest
-      </plain-draggable>
+      <plain-draggable class="item" :active="activeID" @select="select" text="spantest"></plain-draggable>
+      <plain-draggable class="item" :active="activeID" @select="select" text="spantest12"></plain-draggable>
     </div>
   </div>
 </template>
@@ -19,10 +18,15 @@ export default {
   data() {
     return {
       wrapper: null,
-      content: null
+      content: null,
+      activeID: 0
     };
   },
-  methods: {},
+  methods: {
+    select(id) {
+      this.activeID = id;
+    }
+  },
   computed: {},
   mounted() {
     this.$nextTick(() => {
