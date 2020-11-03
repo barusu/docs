@@ -1,14 +1,23 @@
 <template>
-  <div class="timeline">
+  <div class="timeline-view">
     <h2><span>TimeLine</span> <span class="chinese">时间轴</span></h2>
     <p>S形时间轴. CSS组件</p>
     <div class="preview clearfix">
-      <xc-timeline :list="timelinedata" :fontsize="12"></xc-timeline>
+      <xc-timeline :list="timelinedata" :fontsize="12" :count="3" @click="clickhandler"></xc-timeline>
     </div>
     <h3><span>Attributes</span></h3>
     <xc-doc :list="doc"></xc-doc>
     <h3><span>Item Attributes</span></h3>
     <xc-doc :list="itemdoc"></xc-doc>
+    <div class="data-view">
+      <div class="code-wrapper clearfix">
+        <input type="checkbox" id="code_transfer_data1" class="kakushi code-control-ck" v-model="ck1">
+        <div class="code-json full">
+          <p class="code-head json"><xc-icon type="json"></xc-icon> Data <label class="code-control" for="code_transfer_data1">&lt;<span>/</span>&gt;</label></p>
+          <xc-code lang="json" :code="data1" line="30"></xc-code>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -17,23 +26,23 @@ export default {
   data() {
     return {
       timelinedata: [
-        {id: 1, time: '2019-12-24', icon: 'vue', content: '缩放皇家哈鸡儿结尾那段能外发就我房间我12r23sdfwsfwfew'},
-        {id: 2, time: '2019-12-25', icon: 'sass', content: '缩放皇家哈鸡儿结尾那段能外发就我房间我'},
-        {id: 3, time: '2019-12-26', content: 'ewfwfwegerwwwwwwwww'},
-        {id: 4, time: '2019-12-27', content: '缩放皇家哈鸡儿结尾那段能外发就我房间我'},
-        {id: 5, time: '2019-12-28', content: '放不放假被网警被伏击完全比既往不咎放不进去我'},
-        {id: 6, time: '2019-12-29', content: '缩放皇家哈鸡儿结尾那段能外发就我房间我'},
-        {id: 7, time: '2019-12-30', content: '缩放皇家哈鸡儿结尾那段能外发就我房间我'},
-        {id: 8, time: '2019-12-31', content: '缩放皇家哈鸡儿结尾那段能外发就我房间我'},
-        {id: 9, time: '2020-01-01', content: '是的放v额大V健尔康奔溃被是额外VR饿就看软件氪玩家康复科烤漆房不对付首付款把握好将复何及客服和二号分别为将复何及额外加号放我'},
-        {id: 10, time: '2020-01-02', content: '缩放皇家哈鸡儿结尾那段能外发就我房间我'},
-        {id: 11, time: '2020-01-03', content: '是的放v额大V健尔康奔溃被是额外VR饿就看软件氪玩家康复科烤漆房不对付首付款把握好将复何及客服和二号分别为将复何及额外加号放我'},
-        {id: 12, time: '2020-01-04', content: '是的放v额大V健尔康奔溃被是额外VR饿就看软件氪玩家康复科烤漆房不对付首付款把握好将复何及客服和二号分别为将复何及额外加号放我'},
-        {id: 13, time: '2020-01-05', content: '缩放皇家哈鸡儿结尾那段能外发就我房间我'},
-        {id: 14, time: '2020-01-06', content: '缩放皇家哈鸡儿结尾那段能外发就我房间我'},
-        {id: 15, time: '2020-01-07', content: '缩放皇家哈鸡儿结尾那段能外发就我房间我'},
-        {id: 16, time: '2020-01-08', content: '是的放v额大V健尔康奔溃被是额外VR饿就看软件氪玩家康复科烤漆房不对付首付款把握好将复何及客服和二号分别为将复何及额外加号放我'},
-        {id: 17, time: '2020-01-09', content: 'qwqwq'}
+        {id: 1, time: '2019年12月24日', title: '河北省唐山市Xx出租房', icon: 'bar', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 2, time: '2019年12月25日', title: '河北省唐山市Xx出租房', icon: 'plus', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 3, time: '2019年12月26日', title: '河北省唐山市Xx出租房', icon: 'txt', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 4, time: '2019年12月27日', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 5, time: '2019年12月28日', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 6, time: '2019年12月29日', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 7, time: '2019年12月30日', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 8, time: '2019年12月31日', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 9, time: '2020年01月01日', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 10, time: '2020-01-02', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 11, time: '2020-01-03', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 12, time: '2020-01-04', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 13, time: '2020-01-05', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 14, time: '2020-01-06', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 15, time: '2020-01-07', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 16, time: '2020-01-08', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 17, time: '2020-01-09', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'}
       ],
       list: ['pic', 'del', 'txt', 'ok', 'warn', 'error', 'bar', 'plus', 'bilibili', 'github', 'trash', 'copy', 'html', 'sass', 'json', 'vue', 'left', 'right'],
       doc: [
@@ -45,35 +54,40 @@ export default {
         {property: 'id', description: '唯一标识', type: 'String/Number', default: ''},
         {property: 'time', description: '时间文本', type: 'String', default: ''},
         {property: 'content', description: '内容文本', type: 'String', default: ''},
-        {property: 'icon', description: '图标(仅限内置图标)', type: 'String', default: ''},
-        {property: 'img', description: '图片图标(待开发)', type: 'String', default: ''}
-      ]
+        {property: 'icon', description: '图标(仅限内置图标)', type: 'String', default: ''}
+      ],
+      ck1: true,
+      data1: `[
+  {id: 1, time: '2019年12月24日', title: '河北省唐山市Xx出租房', icon: 'bar', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 2, time: '2019年12月25日', title: '河北省唐山市Xx出租房', icon: 'plus', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 3, time: '2019年12月26日', title: '河北省唐山市Xx出租房', icon: 'txt', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 4, time: '2019年12月27日', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 5, time: '2019年12月28日', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 6, time: '2019年12月29日', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 7, time: '2019年12月30日', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 8, time: '2019年12月31日', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 9, time: '2020年01月01日', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 10, time: '2020-01-02', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 11, time: '2020-01-03', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 12, time: '2020-01-04', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 13, time: '2020-01-05', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 14, time: '2020-01-06', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 15, time: '2020-01-07', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 16, time: '2020-01-08', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+  {id: 17, time: '2020-01-09', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'}
+]`
     };
   },
   methods: {
+    clickhandler(i) {
+      console.log(i);
+    }
   }
 }
 </script>
 
 <style lang="scss">
-  .timeline {
-    .preview {
-      padding-bottom: .18rem;
-      .item {
-        float: left;
-        width: 10%;
-        min-width: 60px;
-        padding: 10px;
-        color: #666;
-        text-align: center;
-        svg {
-          height: 36px;
-        }
-        span {
-          display: block;
-          line-height: 2;
-        }
-      }
-    }
+  .timeline-view {
+    padding: 20px;
   }
 </style>
