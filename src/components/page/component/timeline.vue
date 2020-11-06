@@ -1,14 +1,26 @@
 <template>
   <div class="timeline-view">
     <h2><span>TimeLine</span> <span class="chinese">时间轴</span></h2>
-    <p>S形时间轴. CSS组件</p>
+    <p>S形时间轴.</p>
     <div class="preview clearfix">
-      <xc-timeline :list="timelinedata" :fontsize="12" :count="3" @click="clickhandler"></xc-timeline>
+      <xc-timeline :list="timelinedata" :fontsize="12" :count="3" @click="clickhandler" size="s"></xc-timeline>
     </div>
+    <h3><span>Event</span></h3>
+    <xc-doc :list="event" type="event"></xc-doc>
     <h3><span>Attributes</span></h3>
     <xc-doc :list="doc"></xc-doc>
     <h3><span>Item Attributes</span></h3>
     <xc-doc :list="itemdoc"></xc-doc>
+    <div class="data-view">
+      <div class="code-wrapper clearfix">
+        <input type="checkbox" id="code_transfer_data2" class="kakushi code-control-ck" v-model="ck2">
+        <div class="code-json full">
+          <p class="code-head html"><xc-icon type="vue"></xc-icon> Demo <label class="code-control" for="code_transfer_data2">&lt;<span>/</span>&gt;</label></p>
+          <xc-code lang="html" :code="data2" line="3"></xc-code>
+        </div>
+      </div>
+    </div>
+    <br>
     <div class="data-view">
       <div class="code-wrapper clearfix">
         <input type="checkbox" id="code_transfer_data1" class="kakushi code-control-ck" v-model="ck1">
@@ -48,7 +60,9 @@ export default {
       doc: [
         {property: 'count', description: '单行显示的个数', type: 'Number', default: '4'},
         {property: 'fontsize', description: '内容文字字体（px）', type: 'Number', default: '12'},
-        {property: 'list', description: '数据列表', type: 'Array', default: '[Object]'}
+        {property: 'size', description: '尺寸（s & l）', type: 'String', default: 'l'},
+        {property: 'multiple', description: '多选', type: 'Boolean', default: 'false'},
+        {property: 'list', description: '数据列表(对象数组，对象属性见下表)', type: 'Array', default: '[Object]'}
       ],
       itemdoc: [
         {property: 'id', description: '唯一标识', type: 'String/Number', default: ''},
@@ -56,7 +70,11 @@ export default {
         {property: 'content', description: '内容文本', type: 'String', default: ''},
         {property: 'icon', description: '图标(仅限内置图标)', type: 'String', default: ''}
       ],
+      event: [
+        {eventName: 'click', description: '点击 / 选择项变更时（区域：点或时间）触发(取决于multiple属性)', callbackParamet: 'Object / Array'}
+      ],
       ck1: true,
+      ck2: false,
       data1: `[
   {id: 1, time: '2019年12月24日', title: '河北省唐山市Xx出租房', icon: 'bar', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
   {id: 2, time: '2019年12月25日', title: '河北省唐山市Xx出租房', icon: 'plus', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
@@ -75,7 +93,8 @@ export default {
   {id: 15, time: '2020-01-07', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
   {id: 16, time: '2020-01-08', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
   {id: 17, time: '2020-01-09', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'}
-]`
+]`,
+      data2: `<xc-timeline :list="timelinedata" :fontsize="12" :count="3" @click="clickhandler" size="s"></xc-timeline>`
     };
   },
   methods: {
