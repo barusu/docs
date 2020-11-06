@@ -3,7 +3,15 @@
     <h2><span>TimeLine</span> <span class="chinese">时间轴</span></h2>
     <p>S形时间轴.</p>
     <div class="preview clearfix">
-      <xc-timeline :list="timelinedata" :fontsize="12" :count="3" @click="clickhandler" size="s"></xc-timeline>
+      <xc-button :type="multiple ? 'info' : 'error'" @click="multiple = !multiple">multiple</xc-button>
+      <xc-timeline :list="timelinedata" @click="clickhandler" :fontsize="12" :count="4" :multiple="multiple" size="s"></xc-timeline>
+      <div class="code-wrapper clearfix">
+        <input type="checkbox" id="code_timeline1" class="kakushi code-control-ck" checked>
+        <div class="code-html full">
+          <p class="code-head"><xc-icon type="vue"></xc-icon>  <label class="code-control" for="code_timeline1">&lt;<span>/</span>&gt;</label></p>
+          <xc-code lang="html" :code="data2" line="3"></xc-code>
+        </div>
+      </div>
     </div>
     <h3><span>Event</span></h3>
     <xc-doc :list="event" type="event"></xc-doc>
@@ -11,16 +19,6 @@
     <xc-doc :list="doc"></xc-doc>
     <h3><span>Item Attributes</span></h3>
     <xc-doc :list="itemdoc"></xc-doc>
-    <div class="data-view">
-      <div class="code-wrapper clearfix">
-        <input type="checkbox" id="code_transfer_data2" class="kakushi code-control-ck" v-model="ck2">
-        <div class="code-json full">
-          <p class="code-head html"><xc-icon type="vue"></xc-icon> Demo <label class="code-control" for="code_transfer_data2">&lt;<span>/</span>&gt;</label></p>
-          <xc-code lang="html" :code="data2" line="3"></xc-code>
-        </div>
-      </div>
-    </div>
-    <br>
     <div class="data-view">
       <div class="code-wrapper clearfix">
         <input type="checkbox" id="code_transfer_data1" class="kakushi code-control-ck" v-model="ck1">
@@ -75,6 +73,7 @@ export default {
       ],
       ck1: true,
       ck2: false,
+      multiple: false,
       data1: `[
   {id: 1, time: '2019年12月24日', title: '河北省唐山市Xx出租房', icon: 'bar', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
   {id: 2, time: '2019年12月25日', title: '河北省唐山市Xx出租房', icon: 'plus', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
@@ -94,7 +93,7 @@ export default {
   {id: 16, time: '2020-01-08', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
   {id: 17, time: '2020-01-09', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'}
 ]`,
-      data2: `<xc-timeline :list="timelinedata" :fontsize="12" :count="3" @click="clickhandler" size="s"></xc-timeline>`
+      data2: `<xc-timeline :list="timelinedata" @click="clickhandler" :fontsize="12" :count="4" :multiple="multiple" size="s"></xc-timeline>`
     };
   },
   methods: {
