@@ -36,9 +36,9 @@ export default {
   data() {
     return {
       timelinedata: [
-        {id: 1, time: '2019年12月24日', title: '河北省唐山市Xx出租房', icon: 'bar', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 1, time: '2019年12月24日', title: '河北省唐山市Xx出租房', icon: 'bar', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头', checked: true},
         {id: 2, time: '2019年12月25日', title: '河北省唐山市Xx出租房', icon: 'plus', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
-        {id: 3, time: '2019年12月26日', title: '河北省唐山市Xx出租房', icon: 'txt', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
+        {id: 3, time: '2019年12月26日', title: '河北省唐山市Xx出租房', icon: 'txt', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头', checked: true},
         {id: 4, time: '2019年12月27日', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
         {id: 5, time: '2019年12月28日', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
         {id: 6, time: '2019年12月29日', title: '河北省唐山市Xx出租房', content: '被告XX与被害人XX在XX发生口角遂产生报复XX的念头'},
@@ -66,7 +66,8 @@ export default {
         {property: 'id', description: '唯一标识', type: 'String/Number', default: ''},
         {property: 'time', description: '时间文本', type: 'String', default: ''},
         {property: 'content', description: '内容文本', type: 'String', default: ''},
-        {property: 'icon', description: '图标(仅限内置图标)', type: 'String', default: ''}
+        {property: 'icon', description: '图标(仅限内置图标)', type: 'String', default: ''},
+        {property: 'checked', description: '默认选中(多选时有效)', type: 'Boolean', default: 'false'}
       ],
       event: [
         {eventName: 'click', description: '点击 / 选择项变更时（区域：点或时间）触发(取决于multiple属性)', callbackParamet: 'Object / Array'}
