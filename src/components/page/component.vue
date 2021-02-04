@@ -45,6 +45,7 @@
             <li class="oo-menu-item"> <router-link :to="{name: 'calendar'}">Calendar <span>日历</span></router-link> </li>
             <li class="oo-menu-item"> <router-link :to="{name: 'timeline'}">TimeLine <span>时间轴</span></router-link> </li>
             <li class="oo-menu-item"> <router-link :to="{name: 'tree'}">FlexTree <span>树形</span></router-link> </li>
+            <li class="oo-menu-item"> <router-link :to="{name: 'diagram'}">Diagram <span>关系图</span></router-link> </li>
           </ul>
         </p>
         <!-- <input type="checkbox" id="ck_feedback" class="oo-ck">

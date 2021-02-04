@@ -11,6 +11,7 @@ import Calendar from '@/components/page/component/calendar';
 import Message from '@/components/page/component/message';
 import TimeLine from '@/components/page/component/timeline';
 import Tree from '@/components/page/component/tree';
+import Diagram from '@/components/page/component/diagram';
 
 import PluginPage from '@/components/page/plugin';
 import VueDragResize from '@/components/page/plugin/vue-drag-resize';
@@ -36,6 +37,7 @@ export default new Router({
         {path: 'mask', name: 'mask', component: Mask},
         {path: 'message', name: 'message', component: Message},
         {path: 'tree', name: 'tree', component: Tree},
+        {path: 'diagram', name: 'diagram', component: Diagram},
         {path: 'timeline', name: 'timeline', component: TimeLine}
       ]
     }, {
